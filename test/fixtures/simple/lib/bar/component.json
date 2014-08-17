@@ -1,0 +1,6 @@
+{
+    "scripts": ["index.js"],
+    "dependencies": {
+        "component/emitter": "1.1.3"
+    }
+}

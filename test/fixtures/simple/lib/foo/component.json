@@ -1,0 +1,8 @@
+{
+    "locals": ["bar"],
+    "scripts": [
+        "index.js",
+        "script.js"
+    ],
+    "main": "index.js"
+}
