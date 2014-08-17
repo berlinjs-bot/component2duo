@@ -74,6 +74,8 @@ class Converter
             manifestPath = path.join @lookupPath, local, @localManifest
             manifest = require path.join @cwd, @rootPath, manifestPath
             debug "found manifest"
+            if manifest.paths?
+                console.log "'#{local}': ignore paths: #{manifest.paths}"
             @localsMap[local] = 
                 scripts: manifest.scripts
                 absPath: path.dirname manifestPath

@@ -2,9 +2,9 @@
   "name": "component2duo",
   "version": "0.0.1",
   "description": "convert your component project into a duo project",
-  "main": "build/index.js",
   "scripts": {
-    "test": "mocha --harmony-generators --compilers coffee:coffee-script/register"
+    "test": "mocha --harmony-generators --compilers coffee:coffee-script/register",
+    "prepublish": "make clean build"
   },
   "repository": {
     "type": "git",
@@ -20,12 +20,14 @@
     "co": "^3.1.0",
     "coffee-script": "git://github.com/xixixao/coffee-script",
     "requires": "^1.0.1",
-    "thunkify": "^2.1.2"
+    "thunkify": "^2.1.2",
+    "generator-supported": "~0.0.1"
   },
   "devDependencies": {
     "debug": "^1.0.4",
     "gnode": "0.0.8",
     "mocha": "^1.21.4",
-    "chai": "1.5.0"
+    "chai": "1.5.0",
+    "regenerator": "0.4.6"
   }
 }
