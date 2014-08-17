@@ -14,7 +14,7 @@ class Converter
         unless @style in STYLE
             throw new Error 'style should either be "absolute" or "relative"'
 
-        @simulate = opt.simulate or true
+        @simulate = opt.simulate or false
         @cwd = process.cwd()
         debug "cwd is #{@cwd}"
         @localsMap = {}
@@ -63,8 +63,7 @@ class Converter
                     simulateContainer[localName] ?= {}
                     simulateContainer[localName][script] = newContent
                 else
-                    console.log "//fs.writeFileSync..."
-                    #fs.writeFileSync filePath, newContent
+                    fs.writeFileSync filePath, newContent, 'utf8'
 
         return simulateContainer
 
