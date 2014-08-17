@@ -14,9 +14,10 @@ class Converter
         unless @style in STYLE
             throw new Error 'style should either be "absolute" or "relative"'
 
-        @simulate = opt.simulate or false
-        @cwd = process.cwd()
-        debug "cwd is #{@cwd}"
+        @simulate = opt.simulate or true
+        if @rootPath[0] isnt '/'
+            @rootPath = path.join process.cwd(), @rootPath
+        debug "root path: #{@rootPath}"
         @localsMap = {}
         # flatten map like this:
         # localName: {
@@ -32,7 +33,7 @@ class Converter
         
         fullPath = path.join @rootPath, @rootManifest
         debug "starting at #{fullPath}"
-        r = require path.join @cwd, fullPath
+        r = require fullPath
         debug "root component.json - ok"
         @lookupPath = r.paths or r.path
         if @lookupPath.length is 0
@@ -42,7 +43,7 @@ class Converter
             throw new Error 'multiple paths not implemented' 
         @lookupPath = @lookupPath[0]
 
-        @rootLocals =  r.locals or r.locals
+        @rootLocals =  r.locals or r.local
 
         debug "traversing locals for paths: #{@lookupPath}"
         @traverseLocals @rootLocals
@@ -56,7 +57,7 @@ class Converter
             for script in scripts
                 debug "file #{script}"
                 componentPath = path.join absPath, script
-                filePath = path.join @cwd, @rootPath, componentPath
+                filePath = path.join @rootPath, componentPath
                 newContent = @rewriteRequire componentPath, filePath
 
                 if @simulate
@@ -71,17 +72,18 @@ class Converter
         for local in locals
             continue if @localsMap[local]
             debug "traverse '#{local}'"
+            # TODO: try catch multiple lookup paths
             manifestPath = path.join @lookupPath, local, @localManifest
-            manifest = require path.join @cwd, @rootPath, manifestPath
+            manifest = require path.join @rootPath, manifestPath
             debug "found manifest"
             if manifest.paths?
                 console.log "'#{local}': ignore paths: #{manifest.paths}"
             @localsMap[local] = 
                 scripts: manifest.scripts
                 absPath: path.dirname manifestPath
-            debug "locals: #{manifest.locals}"
-            @traverseLocals manifest.locals if manifest.locals?.length > 0
-            return
+            transLocals = manifest.locals or manifest.local or []
+            debug "locals: #{transLocals}"
+            @traverseLocals transLocals if transLocals.length > 0
 
     rewriteRequire: (scriptPath, fullPath) ->
  
