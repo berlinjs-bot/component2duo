@@ -1,5 +1,8 @@
 {
-    "scripts": ["index.js"],
+    "scripts": [
+        "index.js",
+        "qux.js"
+    ],
     "dependencies": {
         "component/emitter": "1.1.3"
     }

@@ -1,3 +1,2 @@
-// line 1
 var bar = require('bar');
-// line 3
+var qux = require('bar/qux');

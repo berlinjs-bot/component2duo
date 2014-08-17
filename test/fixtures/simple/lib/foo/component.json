@@ -2,7 +2,8 @@
     "locals": ["bar"],
     "scripts": [
         "index.js",
-        "script.js"
+        "script.js",
+        "sub/baz.js"
     ],
     "main": "index.js"
 }
