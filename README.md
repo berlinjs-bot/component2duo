@@ -10,7 +10,7 @@ analyzing your root component and all your locals and scripts which are listed i
 
 ## Limitation / not implemented yet
 - root component should have only __one__ element in the `paths` array
-- local components cannot have any lookup path like the root component
+- lookup paths of local components will be ignore, only the root component `paths` is used
 - only files which are listed in the `.scripts` property of your component.json files are analyzed
 
 ## install
