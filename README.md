@@ -33,8 +33,8 @@ console.log(result);
 - __path__ to the root component.json
 - __mode__ Converter.ABSOLUTE or Converter.RELATIVE
 - __opt__ options object
-    - __simulate__ - boolean if true, don't rewrite changes to filesystem, return the changes as result of `start()`, default false
-    - __rootManifest__ filename of the root component manifest, default `component.json`
+    - __simulate__ - boolean, if true: don't rewrite changes to filesystem, return the changes as result of `start()`, default false
+    - __debug__ - boolean, if true: print each require path transformation to stdout
     - __localManifest__ filename of the local components manifest, default `component.json`
 
 ### Mode
@@ -44,10 +44,11 @@ __Converter.RELATIVE__ will rewrite require paths relative to each local compone
 
 ### CLI
 
-    node_modules/.bin/component2duo ~/myApp 0
+    node_modules/.bin/component2duo ~/myApp 0 true
 
 - first argument: path to root component
 - second argument: mode; 0 = ABSOLUTE, 1 = RELATIVE
+- third argument (optional): simulate and print require transformation to stdout
 
 
 ## example

@@ -14,24 +14,27 @@ class Converter
         unless @style in STYLE
             throw new Error 'style should either be "absolute" or "relative"'
 
-        @simulate = opt.simulate or true
+        @simulate = opt.simulate or false
+        @debugPrint = opt.debug or false
+        debug "debug: #{@debugPrint}, simulate: #{@simulate}"
+
         if @rootPath[0] isnt '/'
             @rootPath = path.join process.cwd(), @rootPath
         debug "root path: #{@rootPath}"
+        @rootDir = path.dirname @rootPath
         @localsMap = {}
         # flatten map like this:
         # localName: {
         #   absPath: "/app/lib/local1"
         #   scripts: ["inde.js", "foo/bar.js"]
         # } 
-        @rootManifest = opt.rootManifest or 'component.json'
         @localManifest = opt.localManifest or 'component.json'
         unless @rootPath? or @rootPath is ''
             throw new Error 'no root path was given'
 
     start: ->
         
-        fullPath = path.join @rootPath, @rootManifest
+        fullPath = path.join @rootPath
         debug "starting at #{fullPath}"
         r = require fullPath
         debug "root component.json - ok"
@@ -57,7 +60,7 @@ class Converter
             for script in scripts
                 debug "file #{script}"
                 componentPath = path.join absPath, script
-                filePath = path.join @rootPath, componentPath
+                filePath = path.join @rootDir, componentPath
                 newContent = @rewriteRequire componentPath, filePath
 
                 if @simulate
@@ -74,7 +77,7 @@ class Converter
             debug "traverse '#{local}'"
             # TODO: try catch multiple lookup paths
             manifestPath = path.join @lookupPath, local, @localManifest
-            manifest = require path.join @rootPath, manifestPath
+            manifest = require path.join @rootDir, manifestPath
             debug "found manifest"
             if manifest.paths?
                 console.log "'#{local}': ignore paths: #{manifest.paths}"
@@ -112,7 +115,9 @@ class Converter
                     newRequire = path.relative currentDir, absPath
                     newRequire += '/' + rest.join('/') if rest.length > 0 
                     
-                debug "convert from '#{require.path}' -> '#{newRequire}'"
+                debugStr = "#{scriptPath}: '#{require.path}' -> '#{newRequire}'"
+                debug debugStr
+                console.log debugStr if @debugPrint
                 return "require(#{quote}#{newRequire}#{quote})"
             else
                 debug "ignore remote require: '#{requireRoot}'"
@@ -126,8 +131,11 @@ module.exports = Converter
 
 if require.main is module
     debug "starting main..."
+    if process.argv.length < 3
+        console.log "usage: rootComponentDir {0|1} [true]"
     rootPath = process.argv[2]
     style = parseInt process.argv[3]
+    debugVal = process.argv[4] is 'true'
 
-    converter = new Converter rootPath, style
-    console.log converter.start()
+    converter = new Converter rootPath, style, {debug: debugVal, simulate: debugVal}
+    converter.start()

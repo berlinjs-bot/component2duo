@@ -5,7 +5,7 @@ Converter = require '../lib'
 opts = {simulate: true}
 
 fixture = (name) ->
-  join 'test/fixtures', name
+  join 'test/fixtures', name, 'component.json'
 
 describe 'absolute path replacemnet', ->
 
