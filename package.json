@@ -1,6 +1,6 @@
 {
   "name": "component2duo",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "convert your component project into a duo project",
   "scripts": {
     "test_with_generator": "mocha --harmony-generators --compilers coffee:coffee-script/register",
