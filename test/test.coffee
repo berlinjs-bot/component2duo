@@ -46,3 +46,24 @@ describe 'relative path replacement', ->
     it 'should ignore relative files in a subdirectory', (done) ->
         expect(result.foo['sub/baz.js']).contain "require('../script')"
         done()
+
+describe 'transitive locals', ->
+
+    simple = fixture 'simple'
+    c = new Converter simple, Converter.RELATIVE, opts
+    result = c.start()
+
+    it.skip 'should be traversed', (done) ->
+        done()
+
+describe 'multiple lookup paths', ->
+
+    simple = fixture 'simple'
+    c = new Converter simple, Converter.RELATIVE, opts
+    result = c.start()
+
+    it.skip 'should work with 2 lookup paths in root component', (done) ->
+        done()
+
+    it.skip 'should use inner lookup path within local component', (done) ->
+        done()
