@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "convert your component project into a duo project",
   "scripts": {
-    "test": "mocha --harmony-generators --compilers coffee:coffee-script/register",
+    "test_with_generator": "mocha --harmony-generators --compilers coffee:coffee-script/register",
+    "test": "mocha --compilers coffee:coffee-script/register",
     "prepublish": "make clean build"
   },
   "repository": {
