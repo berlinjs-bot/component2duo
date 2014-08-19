@@ -91,3 +91,14 @@ Your root component is located at `myApp/component.json` with this content:
 
 With component you can write `require('bar')` in the scripts of __foo__.
 With this tool you can choose if you want to rewrite it into an absolute `require('/lib/bar')` or relative `require('../bar')` path.
+
+### example CLI output
+
+If you checkout this project (and make a `npm install`) you can run:
+
+`$ ./bin/cli test/fixtures/simple/component.json 0 true`
+
+then you get this result:
+
+    lib/foo/script.js: 'bar' -> '/lib/bar'
+    lib/foo/script.js: 'bar/qux' -> '/lib/bar/qux'
