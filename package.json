@@ -19,14 +19,14 @@
   },
   "homepage": "https://github.com/timaschew/component2duo",
   "dependencies": {
-    "co": "^3.1.0",
     "coffee-script": "git://github.com/xixixao/coffee-script",
     "requires": "^1.0.1",
-    "thunkify": "^2.1.2",
-    "generator-supported": "~0.0.1"
+    "generator-supported": "~0.0.1",
+    "debug": "^1.0.4"
   },
   "devDependencies": {
-    "debug": "^1.0.4",
+    "co": "^3.1.0",
+    "thunkify": "^2.1.2",
     "gnode": "0.0.8",
     "mocha": "^1.21.4",
     "chai": "1.5.0",
