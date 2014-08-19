@@ -128,14 +128,3 @@ class Converter
         return newContent
 
 module.exports = Converter
-
-if require.main is module
-    debug "starting main..."
-    if process.argv.length < 3
-        console.log "usage: rootComponentDir {0|1} [true]"
-    rootPath = process.argv[2]
-    style = parseInt process.argv[3]
-    debugVal = process.argv[4] is 'true'
-
-    converter = new Converter rootPath, style, {debug: debugVal, simulate: debugVal}
-    converter.start()

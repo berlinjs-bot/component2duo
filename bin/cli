@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+
+// disable this since, no genertor functions are used yet
+// var Converter = require('generator-supported')
+//   ? require('../build')
+//   : require('../build-generator');
+
+var Converter = require('../build');
+var c, debugVal, rootPath, style;
+
+if (process.argv.length < 3) {
+    console.log("usage: rootComponentDir {0|1} [true]");
+}
+
+rootPath = process.argv[2];
+style = parseInt(process.argv[3]);
+debugVal = process.argv[4] === 'true';
+c = new Converter(rootPath, style, {
+    debug: debugVal,
+    simulate: debugVal
+});
+
+c.start();
