@@ -44,7 +44,7 @@ __Converter.RELATIVE__ will rewrite require paths relative to each local compone
 
 ### CLI
 
-    node_modules/.bin/component2duo ~/myApp 0 true
+    node_modules/.bin/component2duo ~/myApp/component.json 0 true
 
 - first argument: path to root component
 - second argument: mode; 0 = ABSOLUTE, 1 = RELATIVE
