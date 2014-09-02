@@ -102,3 +102,12 @@ then you get this result:
 
     lib/foo/script.js: 'bar' -> '/lib/bar'
     lib/foo/script.js: 'bar/qux' -> '/lib/bar/qux'
+
+## Development
+
+    git clone https://github.com/timaschew/component2duo.git
+    cd component2duo
+    npm install
+    npm test
+    
+Currently I'm not using any generator functions, but I will, so currently just ignore the `build-generator` directory. If you don't want use CoffeeScript you can use the `build/index.js`.
