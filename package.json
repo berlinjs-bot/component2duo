@@ -8,6 +8,7 @@
     "prepublish": "make clean build"
   },
   "bin": "./bin/cli",
+  "main": "build/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/timaschew/component2duo.git"
